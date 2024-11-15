@@ -12,6 +12,8 @@ import com.grytsyna.talkchat.entity.SecUser
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.JwtParser
+import io.jsonwebtoken.JwtParserBuilder
 import io.jsonwebtoken.io.Decoders
 import io.jsonwebtoken.security.Keys
 
@@ -24,14 +26,14 @@ class JwtConfiguration {
 
     private static final String ROLE = 'role'
 
-    @Value('${app.jwtSecret}')
+    @Value('${jwt.secret}')
     private String jwtSecret
 
-    @Value('${app.jwtExpirationInMs}')
+    @Value('${jwt.expiration.ms}')
     private int jwtExpirationInMs
 
     String extractUserName(String token) {
-        return extractClaim(token) { claims -> claims.subject }
+        return extractClaim(token) { Claims claims -> claims.subject }
     }
 
     String generateToken(UserDetails userDetails) {
@@ -67,15 +69,14 @@ class JwtConfiguration {
     }
 
     private Date extractExpiration(String token) {
-        return extractClaim(token) { item -> item.expiration }
+        return extractClaim(token) { Claims item -> item.expiration as Date }
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(signingKey)
-                .build()
-                .parseClaimsJws(token)
-                .body
+        JwtParserBuilder parserBuilder = Jwts.parser().setSigningKey(signingKey)
+        JwtParser parser = parserBuilder.build()
+        Claims claims = parser.parseClaimsJws(token).body
+        return claims
     }
 
     private SecretKey getSigningKey() {

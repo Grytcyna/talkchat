@@ -25,7 +25,7 @@ class SecUser implements UserDetails {
 
     @Override
     Collection<? extends GrantedAuthority> getAuthorities() {
-        return [new SimpleGrantedAuthority(role.name)]
+        return [new SimpleGrantedAuthority(role.name())]
     }
 
     @Override

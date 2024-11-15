@@ -15,7 +15,7 @@ enum Role implements GrantedAuthority {
 
     @Override
     String getAuthority() {
-        return name
+        return name()
     }
 
 }
