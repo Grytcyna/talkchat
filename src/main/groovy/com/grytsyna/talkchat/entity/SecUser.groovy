@@ -22,6 +22,9 @@ class SecUser implements UserDetails {
     String email
     String password
     Role role
+    String nickName
+    List<String> subscriptions = []
+    List<String> likedPosts = []
 
     @Override
     Collection<? extends GrantedAuthority> getAuthorities() {

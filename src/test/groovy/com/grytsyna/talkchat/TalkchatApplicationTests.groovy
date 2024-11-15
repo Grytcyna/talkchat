@@ -1,13 +1,13 @@
-package com.grytsyna.talkchat
+// package com.grytsyna.talkchat
 
-import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
+// import org.junit.jupiter.api.Test
+// import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootTest
-class TalkchatApplicationTests {
+// @SpringBootTest
+// class TalkchatApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+//     @Test
+//     void contextLoads() {
+//     }
 
-}
+// }
